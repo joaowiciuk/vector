@@ -5,6 +5,19 @@ import "math"
 // Vector represents a mathematical n-dimensional vector
 type Vector []float64
 
+// Equal compares a and b elementwise under a precision eps.
+func (a Vector) Equal(b Vector, eps float64) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if math.Abs(a[i]-b[i]) > eps {
+			return false
+		}
+	}
+	return true
+}
+
 // Add sums a and b elementwise.
 // Add panics if dimensions are different.
 func (a Vector) Add(b Vector) Vector {
